@@ -1,5 +1,5 @@
  import { Link } from 'react-router-dom'
-import styles from './Productos.css'
+import styles from './Productos.module.css'
 
 const Productos = ({ producto }) => {
   return (
