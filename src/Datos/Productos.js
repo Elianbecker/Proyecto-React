@@ -1,4 +1,4 @@
- const productos = [
+ const Productos = [
   {
     id: 1,
     nombre: "Habanos Cohiba Siglo VI",
@@ -22,4 +22,4 @@
   },
 ]
 
-export default productos
+export default Productos
