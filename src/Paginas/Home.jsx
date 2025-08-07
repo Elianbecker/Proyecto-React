@@ -1,6 +1,6 @@
-import productos from '../Datos/Productosroductos'
+import productos from '../Datos/Productos'
 import Productos from '../Componentes/Productos'
-import './Home.scss'
+import './Home.css'
 
 const Home = () => {
   return (
