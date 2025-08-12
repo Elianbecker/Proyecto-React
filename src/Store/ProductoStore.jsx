@@ -1,30 +1,27 @@
- import { create } from 'zustand'
+ import { create } from "zustand";
 
-const useProductStore = create((set, get) => ({
+const useCarrito = create((set) => ({
   carrito: [],
-  
-  agregarAlCarrito: (producto) => {
-    const carritoActual = get().carrito
-    const productoExistente = carritoActual.find(p => p.id === producto.id)
+  agregarAlCarrito: (producto, cantidad) =>
+    set((state) => {
+      const existe = state.carrito.find((item) => item.id === producto.id);
+      if (existe) {
+        return {
+          carrito: state.carrito.map((item) =>
+            item.id === producto.id
+              ? { ...item, cantidad: item.cantidad + cantidad }
+              : item
+          ),
+        };
+      } else {
+        return { carrito: [...state.carrito, { ...producto, cantidad }] };
+      }
+    }),
+  eliminarDelCarrito: (id) =>
+    set((state) => ({
+      carrito: state.carrito.filter((item) => item.id !== id),
+    })),
+  limpiarCarrito: () => set({ carrito: [] }),
+}));
 
-    if (productoExistente) {
-      
-      const nuevoCarrito = carritoActual.map(p =>
-        p.id === producto.id ? { ...p, cantidad: p.cantidad + 1 } : p
-      )
-      set({ carrito: nuevoCarrito })
-    } else {
-      
-      set({ carrito: [...carritoActual, { ...producto, cantidad: 1 }] })
-    }
-  },
-
-  quitarDelCarrito: (id) => {
-    const nuevoCarrito = get().carrito.filter(p => p.id !== id)
-    set({ carrito: nuevoCarrito })
-  },
-
-  vaciarCarrito: () => set({ carrito: [] })
-}))
-
-export default useProductStore
+export default useCarrito;
